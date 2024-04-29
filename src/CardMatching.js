@@ -6,23 +6,23 @@ const CardMatching = ({ gridSize, handleGridSizeChange }) => {
   const [matchedCards, setMatchedCards] = useState([]);
   const [isGameOver, setIsGameOver] = useState(false);
   console.log(isGameOver);
-  // Generate cards based on the grid size
+  
   useEffect(() => {
     const numCards = gridSize * gridSize;
     const numUniqueCards = numCards / 2;
     const cards = [];
 
-    // Create cards with unique numbers
+    
     for (let i = 1; i <= numUniqueCards; i++) {
       cards.push({ id: i, value: i, matched: false });
       cards.push({ id: numUniqueCards + i, value: i, matched: false });
     }
 
-    // Shuffle the cards
+    
     setCards(shuffleCards(cards));
   }, [gridSize]);
 
-  // Reset the game state
+  
   const resetGame = () => {
     setOpenCards([]);
     setMatchedCards([]);
@@ -30,7 +30,7 @@ const CardMatching = ({ gridSize, handleGridSizeChange }) => {
     handleGridSizeChange(0);
   };
 
-  // Handle card click
+  
   const handleCardClick = (card) => {
     if (openCards.length === 2 || matchedCards.includes(card.id)) {
       return;
@@ -51,7 +51,7 @@ const CardMatching = ({ gridSize, handleGridSizeChange }) => {
     }
   };
 
-  // Check if the game is over
+  
   useEffect(() => {
     if (matchedCards.length === cards.length) {
       setIsGameOver(true);
@@ -60,18 +60,11 @@ const CardMatching = ({ gridSize, handleGridSizeChange }) => {
     }
   }, [matchedCards.length, cards]);
 
-  // Shuffle cards
+  
   const shuffleCards = (cards) => {
     return cards.sort(() => Math.random() - 0.5);
   };
-  console.log(
-    gridSize,
-    matchedCards,
-    'cards',
-    cards,
-    isGameOver,
-    matchedCards.length === cards.length
-  );
+  
   return (
     <div className="game-wrapper flow">
       {isGameOver || !gridSize ? (
